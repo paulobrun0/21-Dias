@@ -4,6 +4,7 @@ import path from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  base: '/21-Dias/',
   plugins: [react(), tailwindcss()],
 
   // onde está o app
