@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
-  // Pasta onde está o app
+  // onde está o app
   root: "client",
 
   resolve: {
@@ -15,11 +15,10 @@ export default defineConfig({
     },
   },
 
-  // Importante para GitHub Pages
+  // necessário para GitHub Pages
   base: "./",
 
   build: {
-    // build final vai para a raiz do repo
     outDir: "dist",
     emptyOutDir: true,
   },
