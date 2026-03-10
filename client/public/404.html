@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desafio 21 Dias</title>
+  <script>
+    // Redirect all 404s to the main app with hash routing
+    // This works with wouter's hash-based routing on GitHub Pages
+    var path = window.location.pathname;
+
+    // Remove trailing slash if present
+    if (path.endsWith('/')) {
+      path = path.slice(0, -1);
+    }
+
+    // Get the route after the repo name
+    var route = path.replace('/21-Dias', '') || '/';
+
+    // Redirect to the main app with hash routing
+    window.location.href = '/21-Dias/#' + route;
+  </script>
+</head>
+
+<body>
+  <p style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+    Carregando Desafio 21 Dias...
+  </p>
+</body>
+
+</html>
