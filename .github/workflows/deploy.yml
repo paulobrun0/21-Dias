@@ -13,30 +13,32 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+build:
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+        cache-dependency-path: client/package-lock.json
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
+      working-directory: client
 
-      - name: Build project
-        run: npm run build
+    - name: Build project
+      run: npm run build
+      working-directory: client
 
-      - name: Upload build artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+    - name: Upload build artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist
 
   deploy:
     needs: build
