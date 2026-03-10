@@ -32,9 +32,6 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Manuscript AI specific
-.manus-logs
-
 # Vite
 .vite
 
@@ -43,3 +40,6 @@ Thumbs.db
 
 # Testing
 coverage
+
+# AI tooling
+.manus-logs
