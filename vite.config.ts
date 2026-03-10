@@ -3,21 +3,27 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 import { defineConfig } from "vite";
 
-const plugins = [react(), tailwindcss()];
-
 export default defineConfig({
-  plugins,
+  plugins: [react(), tailwindcss()],
+
+  // Pasta onde está o app
   root: "client",
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client/src"),
     },
   },
+
+  // Importante para GitHub Pages
   base: "./",
+
   build: {
-    outDir: "../../dist",
+    // build final vai para a raiz do repo
+    outDir: "dist",
     emptyOutDir: true,
   },
+
   server: {
     port: 3000,
     host: true,
