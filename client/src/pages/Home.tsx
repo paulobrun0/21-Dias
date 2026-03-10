@@ -69,69 +69,72 @@ export default function Home() {
 
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
-                <span className="text-xl font-bold text-gray-900">21</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
+                <span className="text-lg sm:text-xl font-bold text-gray-900">21</span>
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Desafio 21 Dias</h1>
-                <p className="text-sm text-gray-600">
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Desafio 21 Dias</h1>
+                <p className="text-xs sm:text-sm text-gray-600">
                   {formatDate(state.startDate)} até {formatDate(state.endDate)}
                 </p>
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="hidden md:flex gap-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">{completedDays}</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Dias Completos</div>
+            <div className="order-3 w-full sm:w-auto flex justify-between sm:order-2 sm:gap-8">
+              {/* Quick Stats */}
+              <div className="flex gap-6 sm:gap-8">
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-green-600">{completedDays}</div>
+                  <div className="text-xs text-gray-600 uppercase tracking-wide">Completos</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-blue-600">{progress}%</div>
+                  <div className="text-xs text-gray-600 uppercase tracking-wide">Progresso</div>
+                </div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{progress}%</div>
-                <div className="text-xs text-gray-600 uppercase tracking-wide">Progresso</div>
-              </div>
-            </div>
 
-            {/* Config Button */}
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              variant="outline"
-              size="sm"
-              className="gap-2"
-            >
-              <Settings className="w-4 h-4" />
-              Editar Metas
-            </Button>
+              {/* Config Button */}
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                variant="outline"
+                size="sm"
+                className="gap-1.5 sm:gap-2"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="hidden sm:inline">Editar Metas</span>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
+
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Circles Grid - Main Content */}
           <div className="lg:col-span-3">
             {/* Metas Display */}
             {state.isConfigured && state.goals.some((g) => g.title) && (
-              <div className="mb-8 p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Suas Metas</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="mb-8 p-4 sm:p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-4">Suas Metas</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                   {state.goals.map((goal) => (
                     <div
                       key={goal.id}
-                      className="p-4 rounded-lg border-2"
+                      className="p-3 sm:p-4 rounded-lg border-2"
                       style={{ borderColor: goal.color, backgroundColor: `${goal.color}15` }}
                     >
                       <div
-                        className="text-xs font-bold uppercase tracking-wide mb-2"
+                        className="text-xs font-bold uppercase tracking-wide mb-1"
                         style={{ color: goal.color }}
                       >
-                        Quadrante {goal.id}
+                        Meta {goal.id}
                       </div>
-                      <p className="text-sm font-medium text-gray-900">{goal.title || '(não configurada)'}</p>
+                      <p className="text-sm font-medium text-gray-900">{goal.title || '(vazio)'}</p>
                     </div>
                   ))}
                 </div>
@@ -139,28 +142,28 @@ export default function Home() {
             )}
 
             {/* Instructions */}
-            <div className="mb-8 p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">Como Usar</h2>
-              <p className="text-gray-600 text-sm mb-3">
-                Clique nos quadrantes de cada círculo para marcar suas metas como concluídas. Cada quadrante (A, B, C, D)
-                tem uma cor diferente que você escolheu. Quando todos os 4 quadrantes de um dia estão preenchidos, o dia fica completo!
+            <div className="mb-8 p-4 sm:p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+              <h2 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Como Usar</h2>
+              <p className="text-gray-600 text-sm mb-4">
+                Clique nos quadrantes de cada círculo para marcar suas metas como concluídas.
+                Quando todos os 4 quadrantes de um dia estão preenchidos, o dia fica completo!
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {state.goals.map((goal) => (
                   <div key={goal.id} className="flex items-center gap-2">
                     <div
-                      className="w-4 h-4 rounded-full border-2 border-gray-800"
+                      className="w-4 h-4 rounded-full border border-gray-400"
                       style={{ backgroundColor: goal.color }}
                     ></div>
-                    <span className="text-xs text-gray-600">Quadrante {goal.id}</span>
+                    <span className="text-xs text-gray-600">Meta {goal.id}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Circles Grid */}
-            <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">
-              <div className="grid grid-cols-5 gap-6 justify-items-center">
+            <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 shadow-sm">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4 justify-items-center">
                 {state.days.map((dayData) => (
                   <div key={dayData.day} className="flex flex-col items-center gap-2">
                     <ChallengeCircle
@@ -171,7 +174,7 @@ export default function Home() {
                     />
                     <button
                       onClick={() => resetDay(dayData.day)}
-                      className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                      className="text-xs text-gray-400 hover:text-red-500 transition-colors -mt-2"
                       title="Resetar dia"
                     >
                       ✕
@@ -184,18 +187,18 @@ export default function Home() {
 
           {/* Sidebar - Statistics & Controls */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 space-y-4">
+            <div className="sticky top-28 space-y-6">
               {/* Progress Card */}
-              <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
-                  Progresso Geral
+              <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 shadow-sm">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+                  Progresso
                 </h3>
 
                 {/* Progress Bar */}
                 <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-1">
                     <span className="text-2xl font-bold text-gray-900">{progress}%</span>
-                    <span className="text-xs text-gray-600">
+                    <span className="text-xs text-gray-500">
                       {state.days.reduce(
                         (acc, d) =>
                           acc + d.quadrants.filter((q) => q.completed).length,
@@ -204,43 +207,39 @@ export default function Home() {
                       / 84
                     </span>
                   </div>
-                  <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-green-500 via-yellow-400 to-blue-500 transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-green-400 to-blue-500 transition-all duration-500"
                       style={{ width: `${progress}%` }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Stats */}
-                <div className="space-y-3 text-sm">
+                <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Dias Completos:</span>
-                    <span className="font-semibold text-green-600">{completedDays}/21</span>
+                    <span className="font-semibold text-green-600">{completedDays} / 21</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Dias Restantes:</span>
                     <span className="font-semibold text-blue-600">{21 - completedDays}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Término:</span>
-                    <span className="font-semibold text-gray-900">{formatDate(state.endDate)}</span>
-                  </div>
                 </div>
               </div>
 
               {/* Motivation Card */}
-              <div className="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-lg border border-yellow-200 p-6">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
+              <div className="bg-yellow-50 rounded-lg border border-yellow-200 p-4 sm:p-5">
+                <h3 className="text-sm font-semibold text-yellow-900 mb-2 uppercase tracking-wider">
                   Motivação
                 </h3>
-                <p className="text-sm text-gray-700 italic leading-relaxed">
-                  "Cada dia completado é um passo em direção ao seu melhor eu. Continue assim!"
+                <p className="text-sm text-yellow-800 italic">
+                  "Continue. Cada passo aproxima você do seu objetivo."
                 </p>
               </div>
 
               {/* Actions */}
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
                 <Button
                   onClick={exportData}
                   variant="outline"
@@ -248,7 +247,7 @@ export default function Home() {
                   size="sm"
                 >
                   <Download className="w-4 h-4" />
-                  Exportar Dados
+                  Exportar
                 </Button>
 
                 <Button
@@ -258,16 +257,8 @@ export default function Home() {
                   size="sm"
                 >
                   <RotateCcw className="w-4 h-4" />
-                  Resetar Tudo
+                  Resetar
                 </Button>
-              </div>
-
-              {/* Info */}
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  Seus dados são salvos automaticamente no seu navegador. Nenhuma informação é
-                  enviada para servidores.
-                </p>
               </div>
             </div>
           </aside>
@@ -275,13 +266,10 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 mt-16 py-8 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center text-sm text-gray-600">
+      <footer className="border-t border-gray-200 mt-12 py-6 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-500">
           <p>
-            Desafio 21 Dias © 2026 • Criado com ❤️ para ajudar você a alcançar suas metas
-          </p>
-          <p className="mt-2 text-xs text-gray-500">
-            Inspirado no método de 21 dias para criar hábitos
+            Desafio 21 Dias &copy; {new Date().getFullYear()} &bull; Feito com ❤️ para seus hábitos.
           </p>
         </div>
       </footer>

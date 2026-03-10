@@ -60,18 +60,18 @@ export default function ChallengeCircle({
   return (
     <div className="flex flex-col items-center gap-2">
       <svg
-        width="120"
-        height="120"
+        width="100"
+        height="100"
         viewBox="0 0 100 100"
-        className={`cursor-pointer transition-transform ${isAnimating ? 'scale-110' : 'scale-100'}`}
+        className={`cursor-pointer transition-transform w-24 h-24 sm:w-28 sm:h-28 ${isAnimating ? 'scale-110' : 'scale-100'}`}
       >
         {/* Circle border */}
-        <circle cx="50" cy="50" r="50" fill="none" stroke="#1F2937" strokeWidth="2" />
+        <circle cx="50" cy="50" r="49" fill="white" stroke="#374151" strokeWidth="2" />
 
         {/* Quadrants */}
         {(['A', 'B', 'C', 'D'] as const).map((quadrant) => {
           const quad = quadrantData[quadrant];
-          const displayColor = quad?.completed ? quad.color : '#FFFFFF';
+          const displayColor = quad?.completed ? quad.color : 'transparent';
           
           return (
             <g
@@ -83,8 +83,6 @@ export default function ChallengeCircle({
               <path
                 d={getQuadrantPath(quadrant)}
                 fill={displayColor}
-                stroke="#1F2937"
-                strokeWidth="1.5"
                 className="transition-all duration-300 hover:opacity-80"
               />
             </g>
@@ -92,17 +90,17 @@ export default function ChallengeCircle({
         })}
 
         {/* Cross lines dividing quadrants */}
-        <line x1="50" y1="0" x2="50" y2="100" stroke="#1F2937" strokeWidth="2" />
-        <line x1="0" y1="50" x2="100" y2="50" stroke="#1F2937" strokeWidth="2" />
+        <line x1="50" y1="0" x2="50" y2="100" stroke="#374151" strokeWidth="1.5" />
+        <line x1="0" y1="50" x2="100" y2="50" stroke="#374151" strokeWidth="1.5" />
 
         {/* Day number in center */}
         <text
           x="50"
-          y="55"
+          y="56"
           textAnchor="middle"
-          fontSize="16"
+          fontSize="18"
           fontWeight="bold"
-          fill="#1F2937"
+          fill="#374151"
           fontFamily="'Roboto Mono', monospace"
         >
           {day}
@@ -111,7 +109,7 @@ export default function ChallengeCircle({
 
       {/* Day label and date */}
       <div className="text-center">
-        <div className="text-xs font-semibold text-gray-600">Dia {day}</div>
+        <div className="text-xs font-semibold text-gray-600 -mt-1">Dia {day}</div>
         <div className="text-xs text-gray-500">{formatDate(date)}</div>
       </div>
     </div>
