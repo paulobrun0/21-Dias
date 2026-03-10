@@ -13,32 +13,42 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-build:
-  runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: npm
-        cache-dependency-path: client/package-lock.json
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: client
+      - name: Install dependencies
+        run: npm install
+        working-directory: client
 
-    - name: Build project
-      run: npm run build
-      working-directory: client
+      - name: Build project
+        run: npm run build
+        working-directory: client
 
-    - name: Upload build artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: dist
+      - name: Debug - list files
+        run: |
+          echo "---- ROOT ----"
+          ls -la
+          echo "---- CLIENT ----"
+          ls -la client
+          echo "---- DIST ----"
+          ls -la dist || echo "dist not found"
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
   deploy:
     needs: build
